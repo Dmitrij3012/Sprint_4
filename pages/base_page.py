@@ -9,6 +9,10 @@ class BasePage:
     def __init__(self, driver):
         self.driver = driver
 
+    @allure.step('Загрузить страницу')
+    def load_page(self, page):
+        self.driver.get(page)
+
     @allure.step('Подождать видимость элемента')
     def wait_for_element(self, locator, timeout=TIMEOUT_VALUE):
         return WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
@@ -53,3 +57,7 @@ class BasePage:
             if window_handle != original_window:
                 self.driver.switch_to.window(window_handle)
         wait.until(EC.title_contains(title_contains))
+
+    @allure.step('Вернуть текущий URL')
+    def return_url(self):
+        return self.driver.current_url
