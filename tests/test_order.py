@@ -4,7 +4,6 @@ import curl
 from generators import *
 from text_constants import ORDER_SUCCESSFUL_TEXT
 from data import first_data_set_for_order_test, second_data_set_for_order_test
-from pages.base_page import BasePage
 from pages.main_page import MainPage
 from pages.order_page import OrderPage
 
@@ -18,10 +17,8 @@ class TestOrder:
     @allure.title('Проверка заказа самоката по кнопке "Заказать" в шапке с двумя наборами данных')
     def test_order_scooter_by_button_in_header(self, driver, name, surname, address, station,
                                                phone, day, rental_days, color, comment):
-        base_page = BasePage(driver)
-        base_page.load_page(curl.MAIN_PAGE_URL)
-
         main_page = MainPage(driver)
+        main_page.load_page(curl.MAIN_PAGE_URL)
         main_page.click_on_order_button_in_header()
 
         name, surname = fake_data()
@@ -49,10 +46,8 @@ class TestOrder:
     @allure.title('Проверка заказа самоката по основной кнопке "Заказать" с двумя наборами данных')
     def test_order_scooter_by_main_button(self, driver, name, surname, address, station,
                                           phone, day, rental_days, color, comment):
-        base_page = BasePage(driver)
-        base_page.load_page(curl.MAIN_PAGE_URL)
-
         main_page = MainPage(driver)
+        main_page.load_page(curl.MAIN_PAGE_URL)
         main_page.click_on_main_order_button()
 
         name, surname = fake_data()
